@@ -29,7 +29,7 @@ def main():
     umax = 10
 
     for o, a in opts:
-        print(o, a)
+
         if o in ("-f", "--file"):
             print(a)
             file_input = a
