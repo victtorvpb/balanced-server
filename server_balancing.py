@@ -16,7 +16,7 @@ class ServerBalancing(object):
             self.ttask = int(ttask)
             self.umax = int(umax)
         except ValueError as e:
-            message =f'Invalid value {umax} or {ttask} in file'
+            message = f"Invalid value {umax} or {ttask} in file"
             logger.error(message)
             raise BaseException(message)
 
@@ -36,7 +36,7 @@ class ServerBalancing(object):
                 usr = int(qtd_user)
                 self.add_users(usr)
             except ValueError as e:
-                message =f'Invalid value {qtd_user} in file'
+                message = f"Invalid value {qtd_user} in file"
                 logger.error(message)
                 raise BaseException(message)
             self.count += len(self.servers)
@@ -47,7 +47,7 @@ class ServerBalancing(object):
             self.count += len(self.servers)
             self.add_line(self.get_servers_snapshot(), output_file)
 
-        self.add_line(f'${self.count}', output_file)
+        self.add_line(f"${self.count}", output_file)
 
         output_file.close()
 
