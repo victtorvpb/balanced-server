@@ -12,8 +12,14 @@ logger.basicConfig(
 
 class ServerBalancing(object):
     def __init__(self, ttask=5, umax=10, output_file_path="output.txt"):
-        self.ttask = ttask
-        self.umax = umax
+        try:
+            self.ttask = int(ttask)
+            self.umax = int(umax)
+        except ValueError as e:
+            message =f'Invalid value {umax} or {ttask} in file'
+            logger.error(message)
+            raise BaseException(message)
+
         self.output_file_path = output_file_path
         self.servers = []
         self.count = 0
@@ -30,7 +36,7 @@ class ServerBalancing(object):
                 usr = int(qtd_user)
                 self.add_users(usr)
             except ValueError as e:
-                message ='Invalid value {qtd_user} in file'
+                message =f'Invalid value {qtd_user} in file'
                 logger.error(message)
                 raise BaseException(message)
             self.count += len(self.servers)
@@ -42,7 +48,7 @@ class ServerBalancing(object):
             self.add_line(self.get_servers_snapshot(), output_file)
 
         self.add_line(f'${self.count}', output_file)
-        print(self.count)
+
         output_file.close()
 
     def read_file_lines(self, file):
